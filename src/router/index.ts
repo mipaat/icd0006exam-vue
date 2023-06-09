@@ -13,6 +13,10 @@ import ProductDelete from '../views/products/ProductDelete.vue';
 import ProductEdit from '../views/products/ProductEdit.vue';
 import ExistenceCreate from '../views/productExistences/ExistenceCreate.vue';
 import ExistenceEdit from '../views/productExistences/ExistenceEdit.vue';
+import RecipesIndex from '../views/recipes/RecipesIndex.vue';
+import RecipeCreate from '../views/recipes/RecipeCreate.vue';
+import RecipeEdit from '../views/recipes/RecipeEdit.vue';
+import RecipeDelete from '../views/recipes/RecipeDelete.vue';
 import { adminNavigationGuard, loginNavigationGuard } from './identityRedirects';
 
 const router = createRouter({
@@ -49,10 +53,35 @@ const router = createRouter({
             component: NotFoundView,
         },
         {
+            path: '/recipes',
+            children: [
+                {
+                    path: '',
+                    name: 'recipes',
+                    component: RecipesIndex,
+                },
+                {
+                    path: 'create',
+                    name: 'recipeCreate',
+                    component: RecipeCreate,
+                },
+                {
+                    path: 'edit',
+                    name: 'recipeEdit',
+                    component: RecipeEdit,
+                },
+                {
+                    path: 'delete',
+                    name: 'recipeDelete',
+                    component: RecipeDelete,
+                },
+            ]
+        },
+        {
             path: '/products',
             children: [
                 {
-                    path: '/',
+                    path: '',
                     name: 'products',
                     component: ProductsIndexView
                 },

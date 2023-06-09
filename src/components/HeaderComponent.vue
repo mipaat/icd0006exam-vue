@@ -24,6 +24,9 @@ const identityStore = useIdentityStore();
                         <li class="nav-item">
                             <RouterLink :to="{name: 'products'}" class="nav-link text-dark">Products</RouterLink>
                         </li>
+                        <li class="nav-item">
+                            <RouterLink :to="{name: 'recipes'}" class="nav-link text-dark">Recipes</RouterLink>
+                        </li>
                         <AdminDropdown v-if="identityStore.jwt?.isAdmin" />
                     </ul>
 

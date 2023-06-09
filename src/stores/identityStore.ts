@@ -4,6 +4,7 @@ import { computed, ref, watch } from 'vue';
 import { JWT_KEY, REFRESH_TOKEN_KEY } from '@/localStorage/LocalStorageKeys';
 import type { IRefreshToken } from '@/dto/identity/IRefreshToken';
 import { DecodedJWT } from '@/dto/identity/DecodedJWT';
+import type { IRecipe } from '@/dto/IRecipe';
 
 const storedJwt = localStorage.getItem(JWT_KEY);
 const storedRefreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
@@ -38,6 +39,10 @@ export const useIdentityStore = defineStore('identityStore', () => {
         return jwt.value.expiresAt.getTime() < new Date().getTime() + 5000;
     };
 
+    const isAllowedToManageRecipe = (recipe: IRecipe) => {
+        return jwt.value?.isAdmin || (recipe.creator?.id && recipe.creator.id === jwt.value?.id);
+    };
+
     const loginRequired = computed(() => {
         return !isLoggedIn.value || isRefreshTokenExpired();
     });
@@ -67,5 +72,5 @@ export const useIdentityStore = defineStore('identityStore', () => {
         }
     });
 
-    return { jwt, refreshToken, isLoggedIn, isRefreshTokenExpired, loginRequired, clearAll, isJwtExpired, ongoingRefreshPromise };
+    return { jwt, refreshToken, isLoggedIn, isRefreshTokenExpired, loginRequired, clearAll, isJwtExpired, ongoingRefreshPromise, isAllowedToManageRecipe };
 });
