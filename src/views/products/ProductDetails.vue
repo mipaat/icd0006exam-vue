@@ -36,7 +36,7 @@ onMounted(async () => {
                 <dd class="col-sm-10">{{ product.unit }}</dd>
                 <dt class="col-sm-2">Product existences</dt>
                 <dd class="col-sm-10">
-                    <ProductExistencesComponent />
+                    <ProductExistencesComponent :products="[product]" />
                 </dd>
             </dl>
         </div>

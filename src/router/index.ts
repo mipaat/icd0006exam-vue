@@ -11,7 +11,9 @@ import ProductCreate from '../views/products/ProductCreate.vue';
 import ProductDetails from '../views/products/ProductDetails.vue';
 import ProductDelete from '../views/products/ProductDelete.vue';
 import ProductEdit from '../views/products/ProductEdit.vue';
-import { adminNavigationGuard } from './identityRedirects';
+import ExistenceCreate from '../views/productExistences/ExistenceCreate.vue';
+import ExistenceEdit from '../views/productExistences/ExistenceEdit.vue';
+import { adminNavigationGuard, loginNavigationGuard } from './identityRedirects';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -76,6 +78,22 @@ const router = createRouter({
                     name: 'productEdit',
                     beforeEnter: adminNavigationGuard,
                     component: ProductEdit,
+                },
+            ]
+        },
+        {
+            path: '/productExistences',
+            beforeEnter: loginNavigationGuard,
+            children: [
+                {
+                    path: 'create',
+                    name: 'existenceCreate',
+                    component: ExistenceCreate,
+                },
+                {
+                    path: 'edit',
+                    name: 'existenceEdit',
+                    component: ExistenceEdit,
                 },
             ]
         },

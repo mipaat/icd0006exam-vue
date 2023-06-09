@@ -37,7 +37,7 @@ onMounted(async () => {
                     </RouterLink>
                 </td>
                 <td>
-                    <ProductExistencesComponent />
+                    <ProductExistencesComponent :products="[product]" />
                 </td>
                 <td>
                     <template v-if="identityStore.jwt?.isAdmin">
