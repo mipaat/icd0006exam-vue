@@ -1,10 +1,15 @@
 import type { IRecipeSearch } from "@/dto/input/IRecipeSearch";
 import { BaseAuthenticatedService } from "./BaseAuthenticatedService";
 import type { IRecipeWithIngredients } from "@/dto/IRecipeWithIngredients";
+import type { ICreateRecipeData } from "@/dto/input/ICreateRecipeData";
 
 export class RecipeService extends BaseAuthenticatedService {
     constructor() {
         super('recipes/');
+    }
+
+    async create(data: ICreateRecipeData) {
+        await this.post('create', data);
     }
 
     async getRecipes(search: IRecipeSearch) {

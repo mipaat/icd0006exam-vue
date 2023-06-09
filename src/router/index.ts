@@ -63,16 +63,19 @@ const router = createRouter({
                 {
                     path: 'create',
                     name: 'recipeCreate',
+                    beforeEnter: loginNavigationGuard,
                     component: RecipeCreate,
                 },
                 {
                     path: 'edit',
                     name: 'recipeEdit',
+                    beforeEnter: loginNavigationGuard,
                     component: RecipeEdit,
                 },
                 {
                     path: 'delete',
                     name: 'recipeDelete',
+                    beforeEnter: loginNavigationGuard,
                     component: RecipeDelete,
                 },
             ]
