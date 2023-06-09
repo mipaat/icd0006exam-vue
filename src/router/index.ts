@@ -6,6 +6,11 @@ import AccessDeniedView from '../views/ForbidView.vue';
 import NotFoundView from '../views/NotFoundView.vue';
 import ErrorView from '../views/ErrorView.vue';
 import ManageUsersView from '../views/admin/ManageUsersView.vue';
+import ProductsIndexView from '../views/products/ProductsIndex.vue';
+import ProductCreate from '../views/products/ProductCreate.vue';
+import ProductDetails from '../views/products/ProductDetails.vue';
+import ProductDelete from '../views/products/ProductDelete.vue';
+import ProductEdit from '../views/products/ProductEdit.vue';
 import { adminNavigationGuard } from './identityRedirects';
 
 const router = createRouter({
@@ -40,6 +45,39 @@ const router = createRouter({
             path: '/notFound',
             name: 'notFound',
             component: NotFoundView,
+        },
+        {
+            path: '/products',
+            children: [
+                {
+                    path: '/',
+                    name: 'products',
+                    component: ProductsIndexView
+                },
+                {
+                    path: 'create',
+                    name: 'productCreate',
+                    component: ProductCreate,
+                    beforeEnter: adminNavigationGuard,
+                },
+                {
+                    path: 'details',
+                    name: 'productDetails',
+                    component: ProductDetails,
+                },
+                {
+                    path: 'delete',
+                    name: 'productDelete',
+                    beforeEnter: adminNavigationGuard,
+                    component: ProductDelete,
+                },
+                {
+                    path: 'edit',
+                    name: 'productEdit',
+                    beforeEnter: adminNavigationGuard,
+                    component: ProductEdit,
+                },
+            ]
         },
         {
             path: '/admin',
